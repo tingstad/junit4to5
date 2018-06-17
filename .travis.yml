@@ -1,0 +1,12 @@
+language: java
+
+jdk:
+    - openjdk7
+    - openjdk8
+    - oraclejdk8
+
+install: true
+
+script:
+    - bash test/test.sh
+
