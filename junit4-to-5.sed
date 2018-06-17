@@ -25,7 +25,8 @@ s/@Ignore/@Disabled/g
     }
     # method start:
     /^    [a-z].*\{ *$/ {
-        s/.*/&\n        org.junit.jupiter.api.Assertions.assertThrows(/
+        p
+        s/.*/        org.junit.jupiter.api.Assertions.assertThrows(/
         G
         a\
         , () -> {
