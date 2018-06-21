@@ -8,4 +8,9 @@ public class ExceptionTest {
         o.hashCode();
     }
 
+    @Test(expected = ArrayIndexOutOfBoundsException.class)
+    public void arrayIndex() {
+        int first = (new int[0])[1];
+    }
+
 }
