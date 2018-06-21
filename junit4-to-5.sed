@@ -14,6 +14,8 @@ s/@After([^A-Za-z]|$)/@AfterEach\1/g
 s/@Before([^A-Za-z]|$)/@BeforeEach\1/g
 s/org.junit.Ignore/org.junit.jupiter.api.Disabled/g
 s/@Ignore/@Disabled/g
+s/org.junit.experimental.categories.Category/org.junit.jupiter.api.Tag/g
+s/@Category\((.*)\.class\)/@Tag("\1")/g
 
 # Assumes an indentation of 4 spaces
 /@Test.*expected/,/    }/ {
