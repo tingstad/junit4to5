@@ -1,6 +1,6 @@
 #!/usr/bin/sed -E -f
 #
-# find . -name \*.java -exec sed -i .old -E -f junit4-to-5.sed {} \;
+# find . -name \*.java -exec sed -i.bak -E -f junit4-to-5.sed {} \;
 
 s/org.junit.Test/org.junit.jupiter.api.Test/g
 s/org.junit.Assert/org.junit.jupiter.api.Assertions/g
