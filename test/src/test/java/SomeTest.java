@@ -8,6 +8,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
+import static org.junit.Assume.assumeFalse;
+import static org.junit.Assume.assumeTrue;
 
 @Category(FastTests.class)
 public class SomeTest {
@@ -37,6 +39,12 @@ public class SomeTest {
     @Ignore("Reason")
     public void ignored() {
         fail("Should not run");
+    }
+
+    @Test
+    public void assumption() {
+        assumeTrue(2 < 3);
+        assumeFalse(3 < 2);
     }
 
 }
