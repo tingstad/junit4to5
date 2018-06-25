@@ -7,8 +7,29 @@ import java.lang.reflect.Method;
 import java.util.Arrays;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
-public class OnlyNonJunitBefore {
+public class QualifiedBeforeTest {
+
+    private static boolean beforeAll;
+
+    private boolean before;
+
+    @org.junit.BeforeClass
+    public static void setUpClass() {
+        beforeAll = true;
+    }
+
+    @org.junit.Before
+    public void setUp() {
+        before = true;
+    }
+
+    @Test
+    public void test() {
+        assertTrue(before);
+        assertEquals(true, beforeAll);
+    }
 
     @Test
     @Before
