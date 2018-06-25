@@ -1,3 +1,5 @@
+package com.github.tingstad.junit4to5;
+
 import org.junit.Test;
 
 public class ExceptionTest {

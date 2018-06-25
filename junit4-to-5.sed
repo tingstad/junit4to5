@@ -5,13 +5,17 @@
 s/org.junit.Test/org.junit.jupiter.api.Test/g
 s/org.junit.Assert/org.junit.jupiter.api.Assertions/g
 s/org.junit.After;/org.junit.jupiter.api.AfterEach;/g
-s/org.junit.Before;/org.junit.jupiter.api.BeforeEach;/g
+
+/import org.junit.(Before|\*);/,$ {
+    s/@Before([^A-Za-z0-9_$]|$)/@BeforeEach\1/g
+}
+s/(@?)org.junit.Before([^A-Za-z0-9_$]|$)/\1org.junit.jupiter.api.BeforeEach\2/g
+
 s/org.junit.AfterClass/org.junit.jupiter.api.AfterAll/g
 s/org.junit.BeforeClass/org.junit.jupiter.api.BeforeAll/g
 s/@AfterClass/@AfterAll/g
 s/@BeforeClass/@BeforeAll/g
 s/@After([^A-Za-z]|$)/@AfterEach\1/g
-s/@Before([^A-Za-z]|$)/@BeforeEach\1/g
 s/org.junit.Ignore/org.junit.jupiter.api.Disabled/g
 s/@Ignore/@Disabled/g
 s/org.junit.Assume/org.junit.jupiter.api.Assumptions/g
