@@ -2,8 +2,14 @@
 #
 # find . -name \*.java -exec sed -i.bak -E -f junit4-to-5.sed {} \;
 
-s/org.junit.Test/org.junit.jupiter.api.Test/g
-s/org.junit.Assert/org.junit.jupiter.api.Assertions/g
+s/org\.junit\.Test/org.junit.jupiter.api.Test/g
+
+/import org.junit.(Assert|\*);/,$ {
+    s/^( *)Assert.(assertTrue|assertFalse|fail|assertEquals)/\1Assertions.\2/g
+}
+s/org\.junit\.Assert/org.junit.jupiter.api.Assertions/g
+s/org\.junit\.\*/org.junit.jupiter.api.\*/g
+
 s/org.junit.After;/org.junit.jupiter.api.AfterEach;/g
 
 /import org.junit.(Before|\*);/,$ {
