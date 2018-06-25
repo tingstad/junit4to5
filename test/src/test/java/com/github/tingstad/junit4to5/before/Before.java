@@ -1,4 +1,4 @@
-package com.github.tingstad.junit4to5;
+package com.github.tingstad.junit4to5.before;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
