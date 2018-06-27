@@ -6,7 +6,7 @@ import org.junit.runners.Suite;
 
 @RunWith(Categories.class)
 @Categories.ExcludeCategory(SkipMe.class)
-@Suite.SuiteClasses(CategoryTest.class)
+@Suite.SuiteClasses(ExcludeTest.class)
 public class CategorySuite {
 
 }

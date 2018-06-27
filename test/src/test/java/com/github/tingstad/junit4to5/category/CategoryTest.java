@@ -8,16 +8,8 @@ import java.lang.reflect.Method;
 import java.util.Arrays;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 
-@Category(FastTests.class)
 public class CategoryTest {
-
-    @Test
-    @Category(SkipMe.class)
-    public void doNotRun() {
-        fail("Should not run");
-    }
 
     @Test
     @Category(FastTests.class)
