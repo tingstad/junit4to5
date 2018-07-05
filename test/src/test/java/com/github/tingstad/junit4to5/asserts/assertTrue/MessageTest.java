@@ -13,7 +13,7 @@ public class MessageTest {
     public void assertTrueSimple() {
         org.junit.Assert.assertTrue("one", true);
         org.junit.Assert.assertTrue("two", 2 < 3 && "".isEmpty());
-        org.junit.Assert.assertTrue("three", "hello, world".equals(("hello, world")) );
+        org.junit.Assert.assertTrue("three", "hello, world".equals("hello, world") );
     }
 
 }

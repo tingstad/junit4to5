@@ -4,29 +4,67 @@
 
 s/org\.junit\.Test/org.junit.jupiter.api.Test/g
 
-/import org.junit.(Assert|\*);/,$ {
+/^import org\.junit\.(Ignore|\*);/,$ {
+    s/@Ignore([^A-Za-z0-9_$]|$)/@Disabled\1/g
+}
+s/org\.junit\.Ignore/org.junit.jupiter.api.Disabled/g
+
+#TODO imports
+/org\.junit\.Assert\.assertTrue\("[^"]*",.*\);/ {
+    # balanced parenthesis:
+    /^[^()]*\([^()]*(\([^()]*\)[^()]*)*\)[^()]*$/ {
+        s/assertTrue\("([^"]*)",(.*)\);/assertTrue(\2, "\1");/
+    }
+}
+
+/^import org\.junit\.(Assert|\*);/,$ {
     s/^( *)Assert.(assertTrue|assertFalse|fail|assertEquals)/\1Assertions.\2/g
 }
 s/org\.junit\.Assert/org.junit.jupiter.api.Assertions/g
-s/org\.junit\.\*/org.junit.jupiter.api.\*/g
 
-s/org.junit.After;/org.junit.jupiter.api.AfterEach;/g
+s/org.\junit\.After;/org.junit.jupiter.api.AfterEach;/g
 
-/import org.junit.(Before|\*);/,$ {
+/^import org\.junit\.(Before|\*);/,$ {
     s/@Before([^A-Za-z0-9_$]|$)/@BeforeEach\1/g
 }
-s/(@?)org.junit.Before([^A-Za-z0-9_$]|$)/\1org.junit.jupiter.api.BeforeEach\2/g
+s/(@?)org\.junit\.Before([^A-Za-z0-9_$]|$)/\1org.junit.jupiter.api.BeforeEach\2/g
 
-s/org.junit.AfterClass/org.junit.jupiter.api.AfterAll/g
-s/org.junit.BeforeClass/org.junit.jupiter.api.BeforeAll/g
+s/org\.junit\.AfterClass/org.junit.jupiter.api.AfterAll/g
+s/org\.junit\.BeforeClass/org.junit.jupiter.api.BeforeAll/g
 s/@AfterClass/@AfterAll/g
 s/@BeforeClass/@BeforeAll/g
 s/@After([^A-Za-z]|$)/@AfterEach\1/g
-s/org.junit.Ignore/org.junit.jupiter.api.Disabled/g
-s/@Ignore/@Disabled/g
 s/org.junit.Assume/org.junit.jupiter.api.Assumptions/g
 s/org.junit.experimental.categories.Category/org.junit.jupiter.api.Tag/g
-s/@Category\((.*)\.class\)/@Tag("\1")/g
+#s/@Category\((.*)\.class\)/@Tag("\1")/g
+#s/@Suite.SuiteClasses\((.*)\)/org.junit.platform.suite.api.SelectClasses/g
+#s/@Categories.ExcludeCategory\((.*)\.class\)/@org.junit.platform.suite.api.ExcludeTags("\1")/g
+#IncludeTags
+:suite
+/^import org\.junit\.experimental\.categories\.(Categories|\*);/,$ {
+    /^import org\.junit\.runner\.(RunWith|\*);/,$ {
+        /@RunWith\(Categories\.class\)/{ b suiteSet }
+    }
+}
+/^import org\.junit\.runner\.(RunWith|\*);/,$ {
+    /^import org\.junit\.experimental\.categories\.(Categories|\*);/,$ {
+        /@RunWith\(Categories\.class\)/{ b suiteSet }
+    }
+}
+/^import org\.junit\.experimental\.categories\.(Categories|\*);/,$ {
+    /@org\.junit\.runner\.RunWith\(Categories\.class\)/{ b suiteSet }
+}
+/^import org\.junit\.runner\.(RunWith|\*);/,$ {
+    /@RunWith\(org\.junit\.experimental\.categories\.Categories\.class\)/{ b suiteSet }
+}
+/@org\.junit\.runner\.RunWith\(org\.junit\.experimental\.categories\.Categories\.class\)/{ b suiteSet }
+b suiteEnd
+:suiteSet
+    s|.*|//@org.junit.platform.suite.api.Suite https://github.com/junit-team/junit5/issues/744|
+    b suite
+:suiteEnd
+
+s/^import org\.junit\.\*;/import org.junit.jupiter.api.*;/
 
 # Assumes an indentation of 4 spaces
 /@Test.*expected/,/    }/ {
