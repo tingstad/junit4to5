@@ -16,4 +16,11 @@ public class MessageTest {
         org.junit.Assert.assertTrue("three", "hello, world".equals("hello, world") );
     }
 
+    @Test
+    public void shouldNotBeAltered() {
+        org.junit.Assert.assertTrue("foo".equals("foo"));
+        org.junit.Assert.assertTrue("foo, bar".equals("foo, bar"));
+        org.junit.Assert.assertTrue("foo\", bar".equals("foo\", bar"));
+    }
+
 }

@@ -10,10 +10,11 @@ s/org\.junit\.Test/org.junit.jupiter.api.Test/g
 s/org\.junit\.Ignore/org.junit.jupiter.api.Disabled/g
 
 #TODO imports
-/org\.junit\.Assert\.assertTrue\("[^"]*",.*\);/ {
-    # balanced parenthesis:
+/org\.junit\.Assert\.assertTrue\( *"[^"()\\]*",.*\);/ {
+    # balanced parentheses, one level deep:
+    # x      (x     [ (x      )x     ]* )x
     /^[^()]*\([^()]*(\([^()]*\)[^()]*)*\)[^()]*$/ {
-        s/assertTrue\("([^"]*)",(.*)\);/assertTrue(\2, "\1");/
+        s/assertTrue\( *"([^"]*)", *(.*)\);/assertTrue(\2, "\1");/
     }
 }
 
