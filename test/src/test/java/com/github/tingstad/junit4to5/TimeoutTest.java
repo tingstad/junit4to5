@@ -11,7 +11,7 @@ import static org.junit.Assert.assertTrue;
 @Ignore("TODO junit5, assertTimeoutPreemptively")
 public class TimeoutTest {
 
-    @Test(timeout = 100)
+    @Test//TODO(timeout = 100)
     public void timeout() {
         assertTrue(true);
     }
