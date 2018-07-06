@@ -42,7 +42,13 @@ s/org\.junit\.Assume/org.junit.jupiter.api.Assumptions/g
     s/@Category\((.*)\.class\)/@Tag("\1")/g
 }
 s/org\.junit\.experimental\.categories\.Category/org.junit.jupiter.api.Tag/g
-#s/@Suite.SuiteClasses\((.*)\)/org.junit.platform.suite.api.SelectClasses/g
+
+/^import org\.junit\.runners\.(Suite|\*);/,$ {
+    s/@(org\.junit\.runners\.)?Suite.SuiteClasses\(/@org.junit.platform.suite.api.SelectClasses(/g
+    /^import org\.junit\.runners\.Suite;/d
+}
+#TODO RunWith(Suite)?
+
 #s/@Categories.ExcludeCategory\((.*)\.class\)/@org.junit.platform.suite.api.ExcludeTags("\1")/g
 #IncludeTags
 :suite
