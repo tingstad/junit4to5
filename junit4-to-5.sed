@@ -36,8 +36,12 @@ s/@AfterClass/@AfterAll/g
 s/@BeforeClass/@BeforeAll/g
 s/@After([^A-Za-z]|$)/@AfterEach\1/g
 s/org.junit.Assume/org.junit.jupiter.api.Assumptions/g
-s/org.junit.experimental.categories.Category/org.junit.jupiter.api.Tag/g
-#s/@Category\((.*)\.class\)/@Tag("\1")/g
+
+/^import org\.junit\.experimental\.categories\.(Category|\*);/,$ {
+    #TODO multiple parms?
+    s/@Category\((.*)\.class\)/@Tag("\1")/g
+}
+s/org\.junit\.experimental\.categories\.Category/org.junit.jupiter.api.Tag/g
 #s/@Suite.SuiteClasses\((.*)\)/org.junit.platform.suite.api.SelectClasses/g
 #s/@Categories.ExcludeCategory\((.*)\.class\)/@org.junit.platform.suite.api.ExcludeTags("\1")/g
 #IncludeTags
