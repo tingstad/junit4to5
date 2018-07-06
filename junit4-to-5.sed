@@ -43,14 +43,20 @@ s/org\.junit\.Assume/org.junit.jupiter.api.Assumptions/g
 }
 s/org\.junit\.experimental\.categories\.Category/org.junit.jupiter.api.Tag/g
 
+#TODO imports (SuiteClasses)
 /^import org\.junit\.runners\.(Suite|\*);/,$ {
     s/@(org\.junit\.runners\.)?Suite.SuiteClasses\(/@org.junit.platform.suite.api.SelectClasses(/g
     /^import org\.junit\.runners\.Suite;/d
 }
 #TODO RunWith(Suite)?
 
-#s/@Categories.ExcludeCategory\((.*)\.class\)/@org.junit.platform.suite.api.ExcludeTags("\1")/g
-#IncludeTags
+#TODO IncludeTags, imports. categories.* (Categories/Category) conflict (Tag/Excludetags)
+/^import org\.junit\.experimental\.categories\.(Categories|\*);/,$ {
+    #TODO multiple params
+    s/@(org\.junit\.experimental\.categories\.)?Categories.ExcludeCategory\((.*)\.class\)/@org.junit.platform.suite.api.ExcludeTags("\1")/g
+}
+s/org\.junit\.experimental\.categories\.Categories\.ExcludeCategory\((.*)\.class\)/org.junit.platform.suite.api.ExcludeTags("\1")/g
+
 :suite
 /^import org\.junit\.experimental\.categories\.(Categories|\*);/,$ {
     /^import org\.junit\.runner\.(RunWith|\*);/,$ {
@@ -74,6 +80,8 @@ b suiteEnd
     s|.*|//@org.junit.platform.suite.api.Suite https://github.com/junit-team/junit5/issues/744|
     b suite
 :suiteEnd
+
+/^import org\.junit\.experimental\.categories\./d
 
 s/^import org\.junit\.\*;/import org.junit.jupiter.api.*;/
 
