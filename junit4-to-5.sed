@@ -60,31 +60,21 @@ s/org\.junit\.experimental\.categories\.Categories\.ExcludeCategory\((.*)\.class
 :suite
 /^import org\.junit\.experimental\.categories\.(Categories|\*);/,$ {
     /^import org\.junit\.runner\.(RunWith|\*);/,$ {
-        /@RunWith\(Categories\.class\)/{
-            b suiteSet
-        }
+        /@RunWith\(Categories\.class\)/ b suiteSet
     }
 }
 /^import org\.junit\.runner\.(RunWith|\*);/,$ {
     /^import org\.junit\.experimental\.categories\.(Categories|\*);/,$ {
-        /@RunWith\(Categories\.class\)/{
-            b suiteSet
-        }
+        /@RunWith\(Categories\.class\)/ b suiteSet
     }
 }
 /^import org\.junit\.experimental\.categories\.(Categories|\*);/,$ {
-    /@org\.junit\.runner\.RunWith\(Categories\.class\)/{
-            b suiteSet
-        }
+    /@org\.junit\.runner\.RunWith\(Categories\.class\)/ b suiteSet
 }
 /^import org\.junit\.runner\.(RunWith|\*);/,$ {
-    /@RunWith\(org\.junit\.experimental\.categories\.Categories\.class\)/{
-            b suiteSet
-        }
+    /@RunWith\(org\.junit\.experimental\.categories\.Categories\.class\)/ b suiteSet
 }
-/@org\.junit\.runner\.RunWith\(org\.junit\.experimental\.categories\.Categories\.class\)/{ 
-     b suiteSet
-}
+/@org\.junit\.runner\.RunWith\(org\.junit\.experimental\.categories\.Categories\.class\)/ b suiteSet
 b suiteEnd
 :suiteSet
     s|.*|//@org.junit.platform.suite.api.Suite https://github.com/junit-team/junit5/issues/744|
