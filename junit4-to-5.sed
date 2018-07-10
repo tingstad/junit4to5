@@ -9,14 +9,112 @@ s/org\.junit\.Test/org.junit.jupiter.api.Test/g
 }
 s/org\.junit\.Ignore/org.junit.jupiter.api.Disabled/g
 
+
 #TODO imports
-/org\.junit\.Assert\.assertTrue\( *"[^"()\\]*",.*\);/ {
-    # balanced parentheses, one level deep:
-    # x      (x     [ (x      )x     ]* )x
-    /^[^()]*\([^()]*(\([^()]*\)[^()]*)*\)[^()]*$/ {
-        s/assertTrue\( *"([^"]*)", *(.*)\);/assertTrue(\2, "\1");/
+/org\.junit\.Assert\.assertTrue *\( *".*\);/ {
+    #b qualifies
+    h
+    :qualifiesYes
+
+    # replace all \\ with BB:
+    :escs
+        s/([^\\])\\\\/\1BB/g
+    t escs
+
+    s/\\"/BQ/g
+
+    # strings and comments
+    :strip
+    /["\/]/{
+        # string
+        /^[^"\/]*"/{
+            :str
+            s/^([^"\/]*"S*)[^"S]/\1S/
+            t str
+            s/"(S*)"/S\1S/
+            b strip
+        }
+        # comments
+        /^[^"\/]*\//{
+            # //
+            /^[^\/]*\/\//{
+                #TODO: length?
+                s|//.*|SLASHSLASH|
+                b strip
+            }
+            # /* */
+            /^[^\/]*\/\*/{
+                :star
+                s|^([^/]*/\*K*)[^*K]|\1K|
+                t star
+                s|^([^/]*/\*K*)\*([^/])|\1K\2|
+                t star
+                s|/\*(K*)\*/|KK\1KK|
+                b strip
+            }
+        }
     }
+
+    # replace (...) with (yyy):
+    :br
+        s/(\(.*)\((y*)[^y\(\)]/\1(\2y/g
+    t br
+    :br2
+    s/\((y*)\)/y\1y/g
+    t br2
+
+    #            (          ,           )          ;
+    /^[^,\(\);]*\([^,\(\);]*,[^,\(\);]*\)[^,\(\);]*;[^,\(\);]*$/{
+        :aloop
+        s/(.*\(A*)[^A,]/\1A/
+        t aloop
+        :bloop
+        s/(.*,B*)[^B)]/\1B/
+        t bloop
+        :cloop
+        s/(.*,BB*C*)[^BC]/\1C/
+        t cloop
+    }
+
+    :loop
+    /C$/{
+        s/C$//
+        x
+        s/(.)\n(.*)/\n\1\2/
+        /\n/!s/(.)$/\n\1/
+        x
+        b loop
+    }
+    x
+    s/\n/\n\n/
+    x
+    :loopb
+    /B$/{
+        s/B$//
+        x
+        s/(.)\n(.*)\n/\n\1\2\n/
+        x
+        b loopb
+    }
+    x
+    s/,\n/\n\n/
+    x
+    :loopa
+    /A,*$/{
+        s/A,*$//
+        x
+        s/(.)\n/\n\1/
+        x
+        b loopa
+    }
+    g
+    s/\n(.*)\n(.*)\n(.*)/\2,\1\3/
+
+    #s/^([^,]*),.*/\1/
+ 
+    # replace character with char from hold space until ',' or ()
 }
+:qualifiesNo
 
 /^import org\.junit\.(Assert|\*);/,$ {
     s/^( *)Assert.(assertTrue|assertFalse|fail|assertEquals)/\1Assertions.\2/g
@@ -119,4 +217,35 @@ s/SpringRunner\.class/SpringExtension.class/g
 # org.mockito:mockito-junit-jupiter:2.16.3
 s/org\.mockito\.(runners|junit)\.MockitoJUnitRunner/org.mockito.junit.jupiter.MockitoExtension/g
 s/MockitoJUnitRunner/MockitoExtension/g
+
+# end
+b
+
+# checks if line qualifies for parameter swap, and
+# returns to :qualifiesYes or :qulifiesNo
+:qualifies
+    # replace all \\ with xx:
+    :escapes
+        s/([^\\])\\\\/\1xx/g
+    t escapes
+    s/\\"/xx/g
+
+    :string
+        # ^[ x    "x    "x    ]*x      "   y    z
+        s/^(([^"]*"[^"]*"[^"]*)*[^"]*)("x*)[^"x](.*)/\1\3x\4/g
+    t string
+ 
+    # balanced parentheses, one level deep:
+    # x      (x     [ (x      )x     ]* )x
+   #/^[^()]*\([^()]*(\([^()]*\)[^()]*)*\)[^()]*$/ {
+   #    s/assertTrue\( *"([^"]*)", *(.*)\);/assertTrue(\2, "\1");/
+   #}
+
+    #TODO: comments
+ 
+    :brackets
+        s/\(([^\(\)]*)\)/C\1D/g
+    t brackets
+    /[\(\)]/b qualifiesNo
+    b qualifiesYes
 
