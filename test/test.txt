@@ -1,0 +1,10 @@
+org.junit.Assert.assertTrue(true);
+org.junit.Assert.assertTrue("msg", true);
+org.junit.Assert.assertTrue("msg", foo().and(bar(3)));
+org.junit.Assert.assertTrue("this" + "that )(", "hello, world".equals("hello, world"));
+org.junit.Assert.assertTrue("\"hello, world\".equals(\"hello, world\")", "hello, world".equals("hello, world"));
+org.junit.Assert.assertTrue("msg" + getSomething(), true);
+org.junit.Assert.assertTrue("msg", method(
+org.junit.Assert.assertTrue("esc\\"escesc\\\\\\"end", true);
+org.junit.Assert.assertTrue("msg" /*****/, true);
+
