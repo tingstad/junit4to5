@@ -80,30 +80,39 @@ s/org\.junit\.Ignore/org.junit.jupiter.api.Disabled/g
     /C$/{
         s/C$//
         x
-        s/(.)\n(.*)/\n\1\2/
-        /\n/!s/(.)$/\n\1/
+        s/(.)\n(.*)/\
+\1\2/
+        /\n/!s/(.)$/\
+\1/
         x
         b loop
     }
     x
-    s/\n/\n\n/
+    s/\n/\
+\
+/
     x
     :loopb
     /B$/{
         s/B$//
         x
-        s/(.)\n(.*)\n/\n\1\2\n/
+        s/(.)\n(.*)\n/\
+\1\2\
+/
         x
         b loopb
     }
     x
-    s/,\n/\n\n/
+    s/,\n/\
+\
+/
     x
     :loopa
     /A,*$/{
         s/A,*$//
         x
-        s/(.)\n/\n\1/
+        s/(.)\n/\
+\1/
         x
         b loopa
     }
