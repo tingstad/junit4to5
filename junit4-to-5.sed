@@ -11,7 +11,7 @@ s/org\.junit\.Ignore/org.junit.jupiter.api.Disabled/g
 
 
 #TODO imports
-/org\.junit\.Assert\.assertTrue *\( *".*\);/ {
+/org\.junit\.Assert\.assertTrue *\(.*,.*\);/ {
     #b qualifies
     h
     :qualifiesYes
@@ -78,50 +78,51 @@ s/org\.junit\.Ignore/org.junit.jupiter.api.Disabled/g
         :cloop
         s/(.*,BB*C*)[^BC]/\1C/
         t cloop
-    }
 
-    :loop
-    /C$/{
-        s/C$//
-        x
-        s/(.)\n(.*)/\
+        :loop
+        /C$/{
+            s/C$//
+            x
+            s/(.)\n(.*)/\
 \1\2/
-        /\n/!s/(.)$/\
+            /\n/!s/(.)$/\
 \1/
+            x
+            b loop
+        }
         x
-        b loop
-    }
-    x
-    s/\n/\
+        s/\n/\
 \
 /
-    x
-    :loopb
-    /B$/{
-        s/B$//
         x
-        s/(.)\n(.*)\n/\
+        :loopb
+        /B$/{
+            s/B$//
+            x
+            s/(.)\n(.*)\n/\
 \1\2\
 /
+            x
+            b loopb
+        }
         x
-        b loopb
-    }
-    x
-    s/,\n/\
+        s/,\n/\
 \
 /
-    x
-    :loopa
-    /A,*$/{
-        s/A,*$//
         x
-        s/(.)\n/\
+        :loopa
+        /A,*$/{
+            s/A,*$//
+            x
+            s/(.)\n/\
 \1/
-        x
-        b loopa
+            x
+            b loopa
+        }
     }
     g
     s/\n(.*)\n(.*)\n(.*)/\2,\1\3/
+
 
     #s/^([^,]*),.*/\1/
  
