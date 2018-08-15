@@ -44,6 +44,10 @@ s/org\.junit\.Ignore/org.junit.jupiter.api.Disabled/g
             }
             # /* */
             /^[^\/]*\/\*/{
+                /\/\*.*\*\//!{
+                    s|/\*.*|SLASHSTAR|
+                    b strip
+                }
                 :star
                 s|^([^/]*/\*K*)[^*K]|\1K|
                 t star
