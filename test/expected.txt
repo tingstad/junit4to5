@@ -1,11 +1,11 @@
 org.junit.jupiter.api.Assertions.assertTrue(true);
-org.junit.jupiter.api.Assertions.assertTrue( true,"msg");
-org.junit.jupiter.api.Assertions.assertTrue( foo().and(bar(3)),"msg");
-org.junit.jupiter.api.Assertions.assertTrue( "hello, world".equals("hello, world"),"this" + "that )(");
-org.junit.jupiter.api.Assertions.assertTrue( "hello, world".equals("hello, world"),"\"hello, world\".equals(\"hello, world\")");
-org.junit.jupiter.api.Assertions.assertTrue( true,"msg" + getSomething());
-org.junit.jupiter.api.Assertions.assertTrue( true,"esc\\"escesc\\\\\\"end");
-org.junit.jupiter.api.Assertions.assertTrue( true,"msg" /*****/);
+org.junit.jupiter.api.Assertions.assertTrue(true, "msg");
+org.junit.jupiter.api.Assertions.assertTrue(foo().and(bar(3)), "msg");
+org.junit.jupiter.api.Assertions.assertTrue("hello, world".equals("hello, world"), "this" + "that )(");
+org.junit.jupiter.api.Assertions.assertTrue("hello, world".equals("hello, world"), "\"hello, world\".equals(\"hello, world\")");
+org.junit.jupiter.api.Assertions.assertTrue(true, "msg" + getSomething());
+org.junit.jupiter.api.Assertions.assertTrue(true, "esc\\"escesc\\\\\\"end");
+org.junit.jupiter.api.Assertions.assertTrue(true, "msg" /*****/);
 org.junit.jupiter.api.Assertions.assertTrue("msg", method(
     ));
 org.junit.jupiter.api.Assertions.assertTrue("msg", // true);
