@@ -9,11 +9,13 @@ public class ClassAndStaticStarImportTest {
     @Test
     public void classTest() {
         Assert.assertTrue(true);
+        Assert.assertTrue("message", true);
     }
 
     @Test
     public void staticTest() {
         assertTrue(true);
+        assertTrue("message", true);
     }
 
 }

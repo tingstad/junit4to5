@@ -7,6 +7,7 @@ public class StarImportTest {
     @Test
     public void test() {
         Assert.assertTrue(true);
+        Assert.assertTrue("message", true);
     }
 
 }

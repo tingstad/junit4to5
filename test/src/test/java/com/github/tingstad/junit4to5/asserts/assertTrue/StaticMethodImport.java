@@ -9,6 +9,7 @@ public class StaticMethodImport {
     @Test
     public void staticTest() {
         assertTrue(true);
+        assertTrue("message", true);
     }
 
 }

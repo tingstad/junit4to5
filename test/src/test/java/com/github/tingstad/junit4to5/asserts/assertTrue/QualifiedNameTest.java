@@ -10,11 +10,13 @@ public class QualifiedNameTest {
     @Test
     public void classImport() {
         Assert.assertTrue(true);
+        Assert.assertTrue("message", true);
     }
 
     @Test
     public void staticImport() {
         assertTrue(true);
+        assertTrue("message", true);
     }
 
 }

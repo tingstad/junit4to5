@@ -9,6 +9,7 @@ public class StaticStartImportTest {
     @Test
     public void test() {
         assertTrue(true);
+        assertTrue("message", true);
     }
 
 }
