@@ -1,4 +1,4 @@
-package com.github.tingstad.junit4to5.asserts.assertTrue;
+package com.github.tingstad.junit4to5.asserts;
 
 import org.junit.Test;
 
