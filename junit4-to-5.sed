@@ -121,7 +121,7 @@ s/org\.junit\.Ignore/org.junit.jupiter.api.Disabled/g
         }
     }
     g
-    s/\n(.*)\n(.*)\n(.*)/\2,\1\3/
+    s/\n *(.*)\n *(.*)\n(.*)/\2, \1\3/
 
 
     #s/^([^,]*),.*/\1/
