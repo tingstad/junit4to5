@@ -1,4 +1,5 @@
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 org.junit.jupiter.api.Assertions.assertTrue(true);
 org.junit.jupiter.api.Assertions.assertTrue(true, "msg");
 org.junit.jupiter.api.Assertions.assertTrue(foo().and(bar(3)), "msg");
