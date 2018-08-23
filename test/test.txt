@@ -1,3 +1,4 @@
+import org.springframework.test.context.junit4.SpringRunner;
 org.junit.Assert.assertTrue(true);
 org.junit.Assert.assertTrue("msg", true);
 org.junit.Assert.assertTrue("msg", foo().and(bar(3)));
