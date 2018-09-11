@@ -186,17 +186,13 @@ b
 
     #          (        ,         )        ;
     /^[^,();]*\([^,();]*,[^,();]*\)[^,();]*;[^,();]*$/{
-        # x(AAA,
+        # x(AAA,AAA
         :aloop
-        s/(.*\(A*)[^A,]/\1A/
+        s/(.*\([A,]*)[^A,)]/\1A/
         t aloop
-        # x(AAA,BBB
-        :bloop
-        s/(.*,B*)[^B)]/\1B/
-        t bloop
-        # x(AAA,BBBCCC
+        # x(AAA,AAACCC
         :cloop
-        s/(.*,BB*C*)[^BC]/\1C/
+        s/(.*,AA*C*)[^AC]/\1C/
         t cloop
 
         :loop
@@ -216,28 +212,22 @@ b
 /
         x
         :loopb
-        /B$/{
-            s/B$//
+        /,$/ {
+            s/,$//
+            x
+            s/,\n/\
+\
+/
+            x
+        }
+        /A$/{
+            s/A$//
             x
             s/(.)\n(.*)\n/\
 \1\2\
 /
             x
             b loopb
-        }
-        x
-        s/,\n/\
-\
-/
-        x
-        :loopa
-        /A,*$/{
-            s/A,*$//
-            x
-            s/(.)\n/\
-\1/
-            x
-            b loopa
         }
     }
     g
