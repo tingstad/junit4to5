@@ -18,4 +18,6 @@ org.junit.Assert.assertFalse("msg", false);
 org.junit.Assert.assertEquals("msg", "expected", "actual");
 org.junit.Assert.assertEquals("expected", "actual");
 org.junit.Assert.assertEquals("msg, important", /* comment, inline */"expected", "actual");//comment, trailing
+org.junit.Assert.assertEquals("msg, important", /* comment, inline */"expected", "actual");/* comment,
+trailing */
 

@@ -167,7 +167,10 @@ b
             # /* */
             /^[^\/]*\/\*/{
                 /\/\*.*\*\//!{
-                    s|/\*.*|SLASHSTAR|
+                    :trailing
+                    s|(/\*T*)[^T]|\1T|
+                    t trailing
+                    s|/\*(T*)|TT\1|
                     b strip
                 }
                 :star
