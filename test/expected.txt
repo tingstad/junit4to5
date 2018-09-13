@@ -17,4 +17,5 @@ org.junit.jupiter.api.Assertions.assertTrue("msg", /* true);
 org.junit.jupiter.api.Assertions.assertFalse(false, "msg");
 org.junit.jupiter.api.Assertions.assertEquals("expected", "actual", "msg");
 org.junit.jupiter.api.Assertions.assertEquals("expected", "actual");
+org.junit.jupiter.api.Assertions.assertEquals(/* comment, inline */"expected", "actual", "msg, important");//comment, trailing
 
