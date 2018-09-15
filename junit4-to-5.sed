@@ -120,10 +120,10 @@ s/org\.junit\.runner\.RunWith/org.junit.jupiter.api.extension.ExtendWith/g
 s/@RunWith/@ExtendWith/g
 
 # org.springframework:spring-test:5.0.0
-s/org.springframework.test.context.junit4.SpringRunner/org.springframework.test.context.junit.jupiter.SpringExtension/g
-s/SpringRunner\.class/SpringExtension.class/g
+s/org.springframework.test.context.junit4.Spring(JUnit4Class)?Runner/org.springframework.test.context.junit.jupiter.SpringExtension/g
+s/Spring(JUnit4Class)?Runner\.class/SpringExtension.class/g
 
-# org.mockito:mockito-junit-jupiter:2.16.3
+# org.mockito:mockito-junit-jupiter:2.17.0
 s/org\.mockito\.(runners|junit)\.MockitoJUnitRunner/org.mockito.junit.jupiter.MockitoExtension/g
 s/MockitoJUnitRunner/MockitoExtension/g
 
