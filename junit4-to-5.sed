@@ -9,22 +9,22 @@ s/org\.junit\.Test/org.junit.jupiter.api.Test/g
 }
 s/org\.junit\.Ignore/org.junit.jupiter.api.Disabled/g
 
-/^ *org\.junit\.Assert\.assert(True|False)/ {
+/^ *org\.junit\.Assert\.assert(True|False|Equals)/ {
     s/org\.junit\.Assert/org.junit.jupiter.api.Assertions/g
     b swap
 }
 /^import org\.junit\.(Assert|\*);/,$ {
     s/import org\.junit\.Assert/import org.junit.jupiter.api.Assertions/g
     s/import org\.junit\.\*/import org.junit.jupiter.api.\*/g
-    s/^( *)Assert\.(fail|assertEquals)/\1Assertions.\2/g
-    /^( *)Assert\.(assertTrue|assertFalse)/ {
+    s/^( *)Assert\.(fail)/\1Assertions.\2/g
+    /^( *)Assert\.(assertTrue|assertFalse|assertEquals)/ {
         s/Assert\.assert/Assertions\.assert/g
         b swap
     }
 }
-/^import static org\.junit\.Assert\.(assertTrue|assertFalse|\*);/,$ {
+/^import static org\.junit\.Assert\.(assertTrue|assertFalse|assertEquals|\*)/,$ {
     s/org\.junit\.Assert/org.junit.jupiter.api.Assertions/g
-    /^ *(assertTrue|assertFalse) *\(/ {
+    /^ *(assertTrue|assertFalse|assertEquals) *\(/ {
         b swap
     }
 }
@@ -130,7 +130,9 @@ s/MockitoJUnitRunner/MockitoExtension/g
 # end
 b
 
-# swap parameters: (<one>, <two>); => (<two>, <one>);
+# swap parameters:
+# assertTrue/False (<one>, <two>); => (<two>, <one>);
+# assertEquals (<one>, <two>, <three>); => (<three>, <one>, <two>);
 :swap
     h
 
@@ -156,14 +158,19 @@ b
         /^[^"\/]*\//{
             # //
             /^[^\/]*\/\//{
-                #TODO: length?
-                s|//.*|SLASHSLASH|
+                :slash
+                s|(//L*)[^L]|\1L|
+                t slash
+                s|//(L*)|LL\1|
                 b strip
             }
             # /* */
             /^[^\/]*\/\*/{
                 /\/\*.*\*\//!{
-                    s|/\*.*|SLASHSTAR|
+                    :trailing
+                    s|(/\*T*)[^T]|\1T|
+                    t trailing
+                    s|/\*(T*)|TT\1|
                     b strip
                 }
                 :star
@@ -179,22 +186,29 @@ b
 
     # replace (...) with (yyy):
     :br
-        s/(\(.*)\((y*)[^y\(\)]/\1(\2y/g
+        s/(\(.*)\((y*)[^y()]/\1(\2y/g
     t br
     :br2
     s/\((y*)\)/y\1y/g
     t br2
 
-    #            (          ,           )          ;
-    /^[^,\(\);]*\([^,\(\);]*,[^,\(\);]*\)[^,\(\);]*;[^,\(\);]*$/{
+    #          (        ,        [,        ]  )        ;
+    /^[^,();]*\([^,();]*,[^,();]*(,[^,();]*)*\)[^,();]*;[^,();]*$/{
+
+        /assertEquals/ {
+            /(.*,.*,.*)/! {
+                x
+                b
+            }
+        }
+
+        # x(AAA,AAA
         :aloop
-        s/(.*\(A*)[^A,]/\1A/
+        s/(.*\([A,]*)[^A,)]/\1A/
         t aloop
-        :bloop
-        s/(.*,B*)[^B)]/\1B/
-        t bloop
+        # x(AAA,AAACCC
         :cloop
-        s/(.*,BB*C*)[^BC]/\1C/
+        s/(.*,AA*C*)[^AC,,]/\1C/
         t cloop
 
         :loop
@@ -214,8 +228,16 @@ b
 /
         x
         :loopb
-        /B$/{
-            s/B$//
+        /,$/ {
+            s/,$//
+            x
+            s/,\n/\
+\
+/
+            x
+        }
+        /A$/{
+            s/A$//
             x
             s/(.)\n(.*)\n/\
 \1\2\
@@ -223,21 +245,8 @@ b
             x
             b loopb
         }
-        x
-        s/,\n/\
-\
-/
-        x
-        :loopa
-        /A,*$/{
-            s/A,*$//
-            x
-            s/(.)\n/\
-\1/
-            x
-            b loopa
-        }
     }
     g
-    s/\n *(.*)\n *(.*)\n(.*)/\2, \1\3/
+    /assertEquals/ s/\n *(.*)\n *(.*)\n *(.*)\n(.*)/\2, \3, \1\4/
+    /assert(True|False)/ s/\n *(.*)\n *(.*)\n(.*)/\2, \1\3/
 
