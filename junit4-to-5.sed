@@ -17,14 +17,14 @@ s/org\.junit\.Ignore/org.junit.jupiter.api.Disabled/g
     s/import org\.junit\.Assert/import org.junit.jupiter.api.Assertions/g
     s/import org\.junit\.\*/import org.junit.jupiter.api.\*/g
     s/^( *)Assert\.(fail)/\1Assertions.\2/g
-    /^( *)Assert\.(assertTrue|assertFalse|assertEquals)/ {
+    /^( *)Assert\.(assertTrue|assertFalse|assertEquals|assertNull|assertNotNull)/ {
         s/Assert\.assert/Assertions\.assert/g
         b swap
     }
 }
-/^import static org\.junit\.Assert\.(assertTrue|assertFalse|assertEquals|\*)/,$ {
+/^import static org\.junit\.Assert\.(assertTrue|assertFalse|assertEquals|assertNull|assertNotNull|\*)/,$ {
     s/org\.junit\.Assert/org.junit.jupiter.api.Assertions/g
-    /^ *(assertTrue|assertFalse|assertEquals) *\(/ {
+    /^ *(assertTrue|assertFalse|assertEquals|assertNull|assertNotNull) *\(/ {
         b swap
     }
 }
@@ -248,5 +248,5 @@ b
     }
     g
     /assertEquals/ s/\n *(.*)\n *(.*)\n *(.*)\n(.*)/\2, \3, \1\4/
-    /assert(True|False)/ s/\n *(.*)\n *(.*)\n(.*)/\2, \1\3/
+    /assert(True|False|NotNull|Null)/ s/\n *(.*)\n *(.*)\n(.*)/\2, \1\3/
 
