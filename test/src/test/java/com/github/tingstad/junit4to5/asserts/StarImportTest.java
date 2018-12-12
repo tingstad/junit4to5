@@ -10,6 +10,10 @@ public class StarImportTest {
         Assert.assertTrue("message", true);
         Assert.assertFalse(false);
         Assert.assertFalse("message", false);
+        Assert.assertNull(null);
+        Assert.assertNull("message", null);
+        Assert.assertNotNull("hello");
+        Assert.assertNotNull("message", "hello");
     }
 
 }

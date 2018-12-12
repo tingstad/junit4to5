@@ -17,7 +17,7 @@ Old                                   | New
 `@Category`                           | `@Tag`
 `@RunWith`                            | `@ExtendWith`
 `@Test(expected=Ex.class) m(){ ...`   | `@Test m(){ assertThrows(Ex.class, () -> ...`
-`assertTrue/assertFalse ("msg", a)`   | `assertTrue/assertFalse(a, "msg")`
+`assertTrue/False/Null("msg", a)`     | `assertTrue/False/Null(a, "msg")`
 `assertEquals(msg, expected, actual)` | `assertEquals(expected, actual, msg)`
 
 ## Motivation
