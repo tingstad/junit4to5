@@ -20,6 +20,10 @@ public class ClassAndStaticStarImportTest {
         assertTrue("message", true);
         assertFalse(false);
         assertFalse("message", false);
+        assertNull(null);
+        assertNull("should be null", null);
+        assertNotNull(1983);
+        assertNotNull("1984, " + "is not null", 1984);
     }
 
 }

@@ -12,6 +12,10 @@ public class StaticStartImportTest {
         assertTrue("message", true);
         assertFalse(false);
         assertFalse("message", false);
+        assertNull(null);
+        assertNull("msg", null);
+        assertNotNull("not null");
+        assertNotNull("can never be null", true);
     }
 
 }
