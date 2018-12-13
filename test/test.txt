@@ -24,4 +24,5 @@ org.junit.Assert.assertNull(value);
 org.junit.Assert.assertNotNull(value);
 org.junit.Assert.assertNull("message", value);
 org.junit.Assert.assertNotNull("message", value);
+org.junit.Assert.assertEquals("Expect 2 record " , 2 ,fooDAO.findFoo(obj.get().getId()).size());
 
