@@ -93,7 +93,7 @@ b suiteEnd
 s/^import org\.junit\.\*;/import org.junit.jupiter.api.*;/
 
 # Assumes an indentation of 4 spaces
-/@Test.*expected/,/    }/ {
+/@Test.*expected/,/^    }/ {
 
     /@Test.*expected/ {
         s/.*[= ](.*\.class).*/        \1/
