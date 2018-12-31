@@ -23,7 +23,6 @@ s/org\.junit\.Ignore/org.junit.jupiter.api.Disabled/g
     }
 }
 /^import static org\.junit\.Assert\.(assertTrue|assertFalse|assert(Not)?Equals|assertNull|assertNotNull|\*)/,$ {
-    s/org\.junit\.Assert/org.junit.jupiter.api.Assertions/g
     /^ *(assertTrue|assertFalse|assert(Not)?Equals|assertNull|assertNotNull) *\(/ {
         b swap
     }
