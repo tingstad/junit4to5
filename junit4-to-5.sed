@@ -22,14 +22,16 @@ s/org\.junit\.Ignore/org.junit.jupiter.api.Disabled/g
         b swap
     }
 }
-/^import static org\.junit\.Assert\.(assertTrue|assertFalse|assert(Not)?Equals|assertNull|assertNotNull)/,$ {
-    /^ *(assertTrue|assertFalse|assert(Not)?Equals|assertNull|assertNotNull) *\(/ {
-        b swap
+/^import static org\.junit\.Assert\./,$ {
+    /^import static org\.junit\.Assert\.\*/,$ {
+        /^ *(assertTrue|assertFalse|assert(Not)?Equals|assertNull|assertNotNull) *\(/ {
+            b swap
+        }
     }
-}
-/^import static org\.junit\.Assert\.\*/,$ {
-    /^ *(assertTrue|assertFalse|assert(Not)?Equals|assertNull|assertNotNull) *\(/ {
-        b swap
+    /^import static org\.junit\.Assert\.(assertTrue|assertFalse|assert(Not)?Equals|assertNull|assertNotNull)/,$ {
+        /^ *(assertTrue|assertFalse|assert(Not)?Equals|assertNull|assertNotNull) *\(/ {
+            b swap
+        }
     }
 }
 s/org\.junit\.Assert/org.junit.jupiter.api.Assertions/g
