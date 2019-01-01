@@ -2,7 +2,6 @@ package com.github.tingstad.junit4to5.asserts;
 
 import static org.junit.Assert.assertTrue;
 
-import org.junit.Assert;
 import org.junit.Test;
 
 public class StaticImportAndLocalMethodTest {
@@ -13,7 +12,7 @@ public class StaticImportAndLocalMethodTest {
     }
 
     private void assertFalse(String message, boolean value) {
-        Assert.assertTrue(message, !value);
+        assertTrue(message, !value);
     }
 
 }
