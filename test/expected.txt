@@ -20,6 +20,8 @@ org.junit.jupiter.api.Assertions.assertEquals("expected", "actual");
 org.junit.jupiter.api.Assertions.assertEquals(/* comment, inline */"expected", "actual", "msg, important");//comment, trailing
 org.junit.jupiter.api.Assertions.assertEquals(/* comment, inline */"expected", "actual", "msg, important");/* comment,
 trailing */
+org.junit.jupiter.api.Assertions.assertNotEquals("expected", "actual");
+org.junit.jupiter.api.Assertions.assertNotEquals("expected", "actual", "msg");
 org.junit.jupiter.api.Assertions.assertNull(value);
 org.junit.jupiter.api.Assertions.assertNotNull(value);
 org.junit.jupiter.api.Assertions.assertNull(value, "message");
