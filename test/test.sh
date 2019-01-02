@@ -13,17 +13,20 @@ main() {
 
     diff "$dir/expected.txt" <(sed $args -f "$dir/../junit4-to-5.sed" "$dir/test.txt")
 
-    { results4=$(mvn_test "$dir/junit4.pom.xml" | tee /dev/fd/4 | grep_results); } 4>&1
+    { results4=$(mvn_test "$dir/junit4.pom.xml"); } 4>&1
     find "$dir/src" -name \*.java -exec sed $args -i.bak -f "$dir/../junit4-to-5.sed" {} \;
     find "$dir/src" -name \*.java.bak -delete
-    { results5=$(mvn_test "$dir/junit5.pom.xml" | tee /dev/fd/4 | grep_results); } 4>&1
+    { results5=$(mvn_test "$dir/junit5.pom.xml"); } 4>&1
     diff <(echo "$results4") <(echo "$results5")
     echo "All OK!"
 }
 
 mvn_test() {
     local file="$1"
-    mvn -B -f "$file" clean test
+    mvn -B -f "$file" clean test \
+        | tee /dev/fd/4 \
+        | grep_results
+    return ${PIPESTATUS[0]}
 }
 
 grep_results() {
