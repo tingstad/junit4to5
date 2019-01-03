@@ -230,7 +230,7 @@ b
     #          (        ,        [,        ]  )        ;
     /^[^,();]*\([^,();]*,[^,();]*(,[^,();]*)*\)[^,();]*;[^,();]*$/{
 
-        /assert(Not)?Equals|assertSame|assertNotSame/ {
+        /assert(Not)?(Equals|Same)/ {
             /(.*,.*,.*)/! {
                 x
                 b
