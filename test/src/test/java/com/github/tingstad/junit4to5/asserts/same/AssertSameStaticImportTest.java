@@ -1,6 +1,7 @@
 package com.github.tingstad.junit4to5.asserts.same;
 
 import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertNotSame;
 
 import org.junit.Test;
 
