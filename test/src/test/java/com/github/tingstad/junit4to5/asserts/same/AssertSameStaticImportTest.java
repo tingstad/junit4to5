@@ -15,7 +15,7 @@ public class AssertSameStaticImportTest {
     }
 
     @Test
-    public void testAssertNotSame() {
+    public void testNotSame() {
         assertNotSame("not same", "one", "two");
     }
 
