@@ -282,6 +282,6 @@ b
         }
     }
     g
-    /assert(Not)?Equals|assertSame|assertNotSame/ s/\n *(.*)\n *(.*)\n *(.*)\n(.*)/\2, \3, \1\4/
+    /assert(Not)?(Equals|Same)/ s/\n *(.*)\n *(.*)\n *(.*)\n(.*)/\2, \3, \1\4/
     /assert(True|False|NotNull|Null)/ s/\n *(.*)\n *(.*)\n(.*)/\2, \1\3/
 
