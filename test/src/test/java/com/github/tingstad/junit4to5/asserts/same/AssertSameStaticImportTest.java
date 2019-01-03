@@ -8,7 +8,7 @@ import org.junit.Test;
 public class AssertSameStaticImportTest {
 
     @Test
-    public void test() {
+    public void testSame() {
         Object object = "hello";
         assertSame("Spaces", object, object);
 		assertSame("Tab indentation", object, object);
