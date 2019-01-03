@@ -16,6 +16,7 @@ public class StaticStarImportTest {
         assertNull("msg", null);
         assertNotNull("not null");
         assertNotNull("can never be null", true);
+        assertSame("same", Boolean.TRUE, Boolean.TRUE);
     }
 
 }
