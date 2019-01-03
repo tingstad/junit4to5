@@ -9,57 +9,57 @@ s/org\.junit\.Test/org.junit.jupiter.api.Test/g
 }
 s/org\.junit\.Ignore/org.junit.jupiter.api.Disabled/g
 
-/^ *org\.junit\.Assert\.assert(True|False|(Not)?(Equals|Null))/ {
+/^[[:space:]]*org\.junit\.Assert\.assert(True|False|(Not)?(Equals|Null))/ {
     s/org\.junit\.Assert/org.junit.jupiter.api.Assertions/g
     b swap
 }
 /^import org\.junit\.(Assert|\*);/,$ {
     s/import org\.junit\.Assert/import org.junit.jupiter.api.Assertions/g
     s/import org\.junit\.\*/import org.junit.jupiter.api.\*/g
-    s/^( *)Assert\.(fail)/\1Assertions.\2/g
-    /^( *)Assert\.assert(True|False|(Not)?(Equals|Null))/ {
+    s/^([[:space:]]*)Assert\.(fail)/\1Assertions.\2/g
+    /^([[:space:]]*)Assert\.assert(True|False|(Not)?(Equals|Null))/ {
         s/Assert\.assert/Assertions\.assert/g
         b swap
     }
 }
 /^import static org\.junit\.Assert\./,$ {
     /^import static org\.junit\.Assert\.\*/,$ {
-        /^ *(assertTrue|assertFalse|assert(Not)?Equals|assertNull|assertNotNull) *\(/ {
+        /^[[:space:]]*(assertTrue|assertFalse|assert(Not)?Equals|assertNull|assertNotNull) *\(/ {
             b swap
         }
     }
     /^import static org\.junit\.Assert\.assertTrue/,$ {
-        /^ *assertTrue *\(/ {
+        /^[[:space:]]*assertTrue *\(/ {
             b swap
         }
     }
     /^import static org\.junit\.Assert\.assertFalse/,$ {
-        /^ *assertFalse *\(/ {
+        /^[[:space:]]*assertFalse *\(/ {
             b swap
         }
     }
     /^import static org\.junit\.Assert\.assertEquals/,$ {
-        /^ *assertEquals *\(/ {
+        /^[[:space:]]*assertEquals *\(/ {
             b swap
         }
     }
     /^import static org\.junit\.Assert\.assertNotEquals/,$ {
-        /^ *assertNotEquals *\(/ {
+        /^[[:space:]]*assertNotEquals *\(/ {
             b swap
         }
     }
     /^import static org\.junit\.Assert\.assertNull/,$ {
-        /^ *assertNull *\(/ {
+        /^[[:space:]]*assertNull *\(/ {
             b swap
         }
     }
     /^import static org\.junit\.Assert\.assertNotNull/,$ {
-        /^ *assertNotNull *\(/ {
+        /^[[:space:]]*assertNotNull *\(/ {
             b swap
         }
     }
     /^import static org\.junit\.Assert\.assertSame/,$ {
-        /^ *assertSame *\(/ {
+        /^[[:space:]]*assertSame *\(/ {
             b swap
         }
     }

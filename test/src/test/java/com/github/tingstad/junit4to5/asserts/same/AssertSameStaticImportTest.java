@@ -10,6 +10,7 @@ public class AssertSameStaticImportTest {
     public void test() {
         Object object = "hello";
         assertSame("Spaces", object, object);
+		assertSame("Tab indentation", object, object);
     }
 
 }
