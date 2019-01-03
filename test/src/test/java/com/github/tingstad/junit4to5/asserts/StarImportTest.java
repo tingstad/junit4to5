@@ -15,6 +15,7 @@ public class StarImportTest {
         Assert.assertNotNull("hello");
         Assert.assertNotNull("message", "hello");
         Assert.assertSame("same", Boolean.TRUE, Boolean.TRUE);
+        Assert.assertNotSame("not same", Boolean.TRUE, Boolean.FALSE);
     }
 
 }
