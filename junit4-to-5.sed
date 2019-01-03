@@ -24,7 +24,7 @@ s/org\.junit\.Ignore/org.junit.jupiter.api.Disabled/g
 }
 /^import static org\.junit\.Assert\./,$ {
     /^import static org\.junit\.Assert\.\*/,$ {
-        /^[[:space:]]*(assertTrue|assertFalse|assert(Not)?(Equals|Null)|assertSame|assertNotSame) *\(/ {
+        /^[[:space:]]*(assertTrue|assertFalse|assert(Not)?(Equals|Null|Same)) *\(/ {
             b swap
         }
     }
