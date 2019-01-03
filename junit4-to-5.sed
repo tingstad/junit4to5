@@ -63,6 +63,11 @@ s/org\.junit\.Ignore/org.junit.jupiter.api.Disabled/g
             b swap
         }
     }
+    /^import static org\.junit\.Assert\.assertNotSame/,$ {
+        /^[[:space:]]*assertNotSame *\(/ {
+            b swap
+        }
+    }
 }
 s/org\.junit\.Assert/org.junit.jupiter.api.Assertions/g
 
