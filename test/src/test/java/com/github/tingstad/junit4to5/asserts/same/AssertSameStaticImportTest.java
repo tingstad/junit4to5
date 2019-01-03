@@ -12,6 +12,10 @@ public class AssertSameStaticImportTest {
         Object object = "hello";
         assertSame("Spaces", object, object);
 		assertSame("Tab indentation", object, object);
+    }
+
+    @Test
+    public void testAssertNotSame() {
         assertNotSame("not same", "one", "two");
     }
 
