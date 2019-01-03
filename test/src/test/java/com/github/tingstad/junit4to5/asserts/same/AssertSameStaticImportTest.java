@@ -19,4 +19,9 @@ public class AssertSameStaticImportTest {
         assertNotSame("not same", "one", "two");
     }
 
+    @Test
+    public void testSameFullyQualified() {
+        org.junit.Assert.assertSame("yes", 2L, 2L);
+    }
+
 }
