@@ -17,7 +17,7 @@ s/org\.junit\.Ignore/org.junit.jupiter.api.Disabled/g
     s/import org\.junit\.Assert/import org.junit.jupiter.api.Assertions/g
     s/import org\.junit\.\*/import org.junit.jupiter.api.\*/g
     s/^([[:space:]]*)Assert\.(fail)/\1Assertions.\2/g
-    /^([[:space:]]*)Assert\.assert(True|False|(Not)?(Equals|Null|Same))/ {
+    /^([[:space:]]*)Assert\.assert(True|False|ArrayEquals|(Not)?(Equals|Null|Same))/ {
         s/Assert\.assert/Assertions\.assert/g
         b swap
     }
@@ -235,7 +235,7 @@ b
     #          (        ,        [,        ]  )        ;
     /^[^,();]*\([^,();]*,[^,();]*(,[^,();]*)*\)[^,();]*;[^,();]*$/{
 
-        /assert(Not)?(Equals|Same)/ {
+        /assert(ArrayEquals|(Not)?(Equals|Same))/ {
             /(.*,.*,.*)/! {
                 x
                 b
@@ -287,6 +287,6 @@ b
         }
     }
     g
-    /assert(Not)?(Equals|Same)/ s/\n *(.*)\n *(.*)\n *(.*)\n(.*)/\2, \3, \1\4/
+    /assert(ArrayEquals|(Not)?(Equals|Same))/ s/\n *(.*)\n *(.*)\n *(.*)\n(.*)/\2, \3, \1\4/
     /assert(True|False|NotNull|Null)/ s/\n *(.*)\n *(.*)\n(.*)/\2, \1\3/
 
