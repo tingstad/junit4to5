@@ -13,7 +13,7 @@ public class AssertArrayEqualsTest {
         String msg = "message";
         Assert.assertArrayEquals(msg, chars, chars);
         org.junit.Assert.assertArrayEquals(msg, chars, chars);
-        //assertArrayEquals(msg, chars, chars);
+        assertArrayEquals(msg, chars, chars);
     }
 
 }
