@@ -10,6 +10,7 @@ public class AssertArrayEqualsTest {
         char[] chars = "char array".toCharArray();
         String msg = "message";
         Assert.assertArrayEquals(msg, chars, chars);
+        org.junit.Assert.assertArrayEquals(msg, chars, chars);
     }
 
 }
