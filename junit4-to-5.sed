@@ -9,7 +9,7 @@ s/org\.junit\.Test/org.junit.jupiter.api.Test/g
 }
 s/org\.junit\.Ignore/org.junit.jupiter.api.Disabled/g
 
-/^[[:space:]]*org\.junit\.Assert\.assert(True|False|(Not)?(Equals|Null|Same))/ {
+/^[[:space:]]*org\.junit\.Assert\.assert(True|False|ArrayEquals|(Not)?(Equals|Null|Same))/ {
     s/org\.junit\.Assert/org.junit.jupiter.api.Assertions/g
     b swap
 }
@@ -17,14 +17,14 @@ s/org\.junit\.Ignore/org.junit.jupiter.api.Disabled/g
     s/import org\.junit\.Assert/import org.junit.jupiter.api.Assertions/g
     s/import org\.junit\.\*/import org.junit.jupiter.api.\*/g
     s/^([[:space:]]*)Assert\.(fail)/\1Assertions.\2/g
-    /^([[:space:]]*)Assert\.assert(True|False|(Not)?(Equals|Null|Same))/ {
+    /^([[:space:]]*)Assert\.assert(True|False|ArrayEquals|(Not)?(Equals|Null|Same))/ {
         s/Assert\.assert/Assertions\.assert/g
         b swap
     }
 }
 /^import static org\.junit\.Assert\./,$ {
     /^import static org\.junit\.Assert\.\*/,$ {
-        /^[[:space:]]*(assertTrue|assertFalse|assert(Not)?(Equals|Null|Same)) *\(/ {
+        /^[[:space:]]*(assert(True|False|ArrayEquals|(Not)?(Equals|Null|Same))) *\(/ {
             b swap
         }
     }
@@ -65,6 +65,11 @@ s/org\.junit\.Ignore/org.junit.jupiter.api.Disabled/g
     }
     /^import static org\.junit\.Assert\.assertNotSame/,$ {
         /^[[:space:]]*assertNotSame *\(/ {
+            b swap
+        }
+    }
+    /^import static org\.junit\.Assert\.assertArrayEquals/,$ {
+        /^[[:space:]]*assertArrayEquals *\(/ {
             b swap
         }
     }
@@ -235,7 +240,7 @@ b
     #          (        ,        [,        ]  )        ;
     /^[^,();]*\([^,();]*,[^,();]*(,[^,();]*)*\)[^,();]*;[^,();]*$/{
 
-        /assert(Not)?(Equals|Same)/ {
+        /assert(ArrayEquals|(Not)?(Equals|Same))/ {
             /(.*,.*,.*)/! {
                 x
                 b
@@ -287,6 +292,6 @@ b
         }
     }
     g
-    /assert(Not)?(Equals|Same)/ s/\n *(.*)\n *(.*)\n *(.*)\n(.*)/\2, \3, \1\4/
+    /assert(ArrayEquals|(Not)?(Equals|Same))/ s/\n *(.*)\n *(.*)\n *(.*)\n(.*)/\2, \3, \1\4/
     /assert(True|False|NotNull|Null)/ s/\n *(.*)\n *(.*)\n(.*)/\2, \1\3/
 
