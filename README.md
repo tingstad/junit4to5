@@ -21,6 +21,7 @@ Old                                   | New
 `assertNull/assertNotNull("msg", val)`| `assertNull/assertNotNull(val, "msg")`
 `assertEquals(msg, expected, actual)` | `assert(Not)Equals(expected, actual, msg)`
 `assertSame/NotSame(msg, expected, actual)`| `assert(Not)Same(expected, actual, msg)`
+`assertArrayEquals(msg, expected, actual)` | `assertArrayEquals(expected, actual, msg)`
 
 ## Motivation
 
