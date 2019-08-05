@@ -253,7 +253,7 @@ b
         t aloop
         # x(AAA,AAACCC
         :cloop
-        s/(.*,AA*C*)[^AC,,]/\1C/
+        s/(.*,AA*C*)[^AC,]/\1C/
         t cloop
 
         :loop
