@@ -1,7 +1,6 @@
 language: java
 
-os:
-    - linux
+dist: trusty
 
 matrix:
   include:
