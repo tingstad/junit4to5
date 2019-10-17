@@ -1,6 +1,6 @@
 #!/usr/bin/sed -E -f
-#
-# find . -name \*.java -exec sed -i.bak -E -f junit4-to-5.sed {} \;
+# Richard H. Tingstad
+# find . -name \*.java -exec sed -i.bak -E -f junit4-to-5.sed {} \; -exec rm {}.bak \;
 
 s/org\.junit\.Test/org.junit.jupiter.api.Test/g
 
