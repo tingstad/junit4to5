@@ -14,8 +14,8 @@ main() {
     diff "$dir/expected.txt" <(sed $args -f "$dir/../junit4-to-5.sed" "$dir/test.txt")
 
     { results4=$(mvn_test "$dir/junit4.pom.xml"); } 4>&1
-    find "$dir/src" -name \*.java -exec sed $args -i.bak -f "$dir/../junit4-to-5.sed" {} \;
-    find "$dir/src" -name \*.java.bak -delete
+    find "$dir/src" -name \*.java -exec sed $args -i.bak -f "$dir/../junit4-to-5.sed" {} \; \
+        -exec rm {}.bak \;
     { results5=$(mvn_test "$dir/junit5.pom.xml"); } 4>&1
     diff <(echo "$results4") <(echo "$results5")
     echo "All OK!"
