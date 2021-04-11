@@ -29,10 +29,15 @@ Save a ton of work by employing a re-usable script instead of repeating manual c
 
 ## How to use
 
-Download file [junit4-to-5.sed](https://github.com/tingstad/junit4to5/blob/master/junit4-to-5.sed) ([raw](https://raw.githubusercontent.com/tingstad/junit4to5/master/junit4-to-5.sed)) and run:
+Download and run file [junit4-to-5.sed](https://github.com/tingstad/junit4to5/blob/master/junit4-to-5.sed) on all java test files:
+```sh
+$(command -v wget && printf %s -O- || command -v curl) \
+    https://raw.githubusercontent.com/tingstad/junit4to5/master/junit4-to-5.sed \
+    > junit4-to-5.sed
+
+find ./src/test/ -name \*.java -exec sed -E -i.bak -f junit4-to-5.sed {} \; -exec rm {}.bak \;
 ```
-find ./src/ -name \*.java -exec sed -E -i.bak -f junit4-to-5.sed {} \; -exec rm {}.bak \;
-```
+
 Then update your `pom.xml` dependencies, see [this example](https://github.com/tingstad/junit4to5/blob/master/test/junit5.pom.xml) or the [User Guide](https://junit.org/junit5/docs/current/user-guide/#running-tests-build).
 Finally, fix any remaining build failures manually (or create an [issue](https://github.com/tingstad/junit4to5/issues) for me :))
 
