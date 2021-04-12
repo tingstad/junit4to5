@@ -45,9 +45,9 @@ less_than_4_2() {
 less_than_4_2 "1.17"
 less_than_4_2 "3.02"
 less_than_4_2 "4.1"
-! less_than_4_2 "4.2"
-! less_than_4_2 "4.4"
-! less_than_4_2 "30.0"
+! less_than_4_2 "4.2" || exit 1
+! less_than_4_2 "4.4" || exit 1
+! less_than_4_2 "30.0" || exit 1
 
 main "$@"
 
