@@ -44,6 +44,7 @@ less_than_4_2() {
 
 less_than_4_2 "1.17"
 less_than_4_2 "3.02"
+less_than_4_2 "3.2"
 less_than_4_2 "4.1"
 ! less_than_4_2 "4.2" || exit 1
 ! less_than_4_2 "4.4" || exit 1
