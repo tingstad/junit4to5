@@ -43,7 +43,7 @@ Finally, fix any remaining build failures manually (or create an [issue](https:/
 
 ## Philosophy
 
-1. Tries not to frak up by being conservative and only making changes with a high probability of being correct
+1. Should only make changes with a high probability of being correct
 2. Should not change unaffected lines and formatting
 3. Should make changes non-breaking (compiling and passing) when possible
 4. Should leave difficult problems to the humans and let the test fail to be easily detectable
@@ -51,8 +51,9 @@ Finally, fix any remaining build failures manually (or create an [issue](https:/
 ## Why sed?
 
 1. It is almost ubiquitous, so the script has few dependencies and is easy to install and run
-2. Simple search and replace is easy to implement
-3. Fun challenge to do a bit more complex tasks
+2. Does not re-format code (see Philosophy)
+3. Simple search and replace is easy to implement
+4. Fun challenge to do a bit more complex tasks
 
 ## Limitations
 
