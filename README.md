@@ -16,6 +16,7 @@ Old                                   | New
 `@Ignore`                             | `@Disabled`
 `@Category`                           | `@Tag`
 `@RunWith`                            | `@ExtendWith`
+`@Test(timeout=3000)`                 | `@Timeout(3)`
 `@Test(expected=Ex.class) m(){ ...`   | `@Test m(){ assertThrows(Ex.class, () -> ...`
 `assertTrue/assertFalse("msg", val)`  | `assertTrue/assertFalse(val, "msg")`
 `assertNull/assertNotNull("msg", val)`| `assertNull/assertNotNull(val, "msg")`
