@@ -142,9 +142,12 @@ s/^import org\.junit\.\*;/import org.junit.jupiter.api.*;/
     h
     #remove /* */ comments:
     s|/\*.*\*/||g
-    #remove // or /* comments:
-    s|/[/*].*||
+    #remove // comments:
+    s|//.*||
     /timeout.*=/! {
+        g; b endtimeout
+    }
+    /\/\*/ {
         g; b endtimeout
     }
     #only balanced parenthesis (max three levels):
