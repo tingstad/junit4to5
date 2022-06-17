@@ -2,23 +2,40 @@
 set -e
 
 main() {
-    dir="$( cd "$(dirname "$0")" && pwd )"
+    dir=$(cd -- "$(dirname -- "${BASH_SOURCE[0]:-$0}")" >/dev/null 2>&1 ; pwd -P)
 
     gnuver=$(sed --version 2>/dev/null | grep GNU | grep -E -o '[0-9]+\.[0-9]+' || true)
     if [ -n "$gnuver" ] && less_than_4_2 $gnuver; then
-        args="-r"
+        arg="-r"
     else
-        args="-E"
+        arg="-E"
     fi
 
-    diff "$dir/expected.txt" <(sed $args -f "$dir/../junit4-to-5.sed" "$dir/test.txt")
+    for opt; do
+        case "$opt" in
+            txt)
+                run_txt "$dir" "$arg" ;;
+            mvn)
+                run_mvn "$dir" "$arg" ;;
+            *)
+                echo "Unknown arg: $opt" >&2
+                exit 1 ;;
+        esac
+    done
 
+    echo "All OK!"
+}
+
+run_txt() { dir="$1" arg="$2"
+    diff "$dir/expected.txt" <(sed $arg -f "$dir/../junit4-to-5.sed" "$dir/test.txt")
+}
+
+run_mvn() { dir="$1" arg="$2"
     { results4=$(mvn_test "$dir/junit4.pom.xml"); } 4>&1
-    find "$dir/src" -name \*.java -exec sed $args -i.bak -f "$dir/../junit4-to-5.sed" {} \; \
+    find "$dir/src" -name \*.java -exec sed $arg -i.bak -f "$dir/../junit4-to-5.sed" {} \; \
         -exec rm {}.bak \;
     { results5=$(mvn_test "$dir/junit5.pom.xml"); } 4>&1
     diff <(echo "$results4") <(echo "$results5")
-    echo "All OK!"
 }
 
 mvn_test() {
@@ -50,5 +67,14 @@ less_than_4_2 "4.1"
 ! less_than_4_2 "4.4" || exit 1
 ! less_than_4_2 "30.0" || exit 1
 
-main "$@"
+if [ -z "$BASH_VERSION" ]; then
+    >&2 echo "Bash is required"
+    exit 1
+fi
+
+if [ $# -gt 0 ]; then
+    main "$@"
+else
+    main txt mvn
+fi
 
