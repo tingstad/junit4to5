@@ -138,6 +138,44 @@ b suiteEnd
 
 s/^import org\.junit\.\*;/import org.junit.jupiter.api.*;/
 
+/^[[:space:]]*@(org\.junit\.)?Test[[:space:]]*\((.*[^[:alnum:]])?timeout[[:space:]]*=/ {
+    h
+    #remove /* */ comments:
+    s|/\*.*\*/||g
+    #remove // or /* comments:
+    s|/[/*].*||
+    /timeout.*=/! {
+        g; b endtimeout
+    }
+    #only balanced parenthesis (max three levels):
+    #^       ([       ({       (       )}*       )]*       )
+    /^[^()]*\(([^()]*\(([^()]*\([^()]*\))*[^()]*\))*[^()]*\)[^()]*$/! {
+        g; b endtimeout
+    }
+    /timeout.*=.*,.*expected.*=/ {
+        #put expected first if not first:
+        s/^([^(]*\()([^,]*), ?(.*expected.*)(\)[^)]*)$/\1\3, \2\4/
+    }
+    h
+    #remove timeout from @Test:
+    s/^([^,]*)(,.*)?timeout.*\)/\1)/
+    #remove empty () if present:
+    s/^([^(]*[^[:space:]])[[:space:]]*\([[:space:]]*\)[[:space:]]*$/\1/
+    H; g
+    #Test(timeout -> Timeout (line 1)
+    s/@.*timeout[^=]*=[[:space:]]*/@org.junit.jupiter.api.Timeout(/
+    s/(@org.junit.jupiter.api.Timeout\([0-9]+)_?000L?[[:space:]]*\)/\1)/
+    /@org.junit.jupiter.api.Timeout\([0-9_]+\)/! {
+        s/(@org.junit.jupiter.api.Timeout\()(.*)\)[^)]*(\n)/\1value=\2, unit=java.util.concurrent.TimeUnit.MILLISECONDS)\3/
+    }
+    h
+    s/(.*)\n(.*)/\1/
+    p
+    g
+    s/(.*)\n(.*)/\2/
+    :endtimeout
+}
+
 # Assumes an indentation of 4 spaces
 /@Test.*expected/,/^    }/ {
 

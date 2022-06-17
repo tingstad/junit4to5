@@ -1,6 +1,5 @@
 package com.github.tingstad.junit4to5;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.assertTrue;
@@ -8,20 +7,26 @@ import static org.junit.Assert.assertTrue;
 /**
  * @see ExceptionTest
  */
-@Ignore("TODO junit5, assertTimeoutPreemptively")
 public class TimeoutTest {
 
-    @Test//TODO(timeout = 100)
+    private final int val = 100;
+
+    @Test  (timeout = 1000)
     public void timeout() {
         assertTrue(true);
     }
 
-    @Test(timeout = 100, expected = Exception.class)
+    @Test (timeout = val)
+    public void timeoutVal() {
+        assertTrue(true);
+    }
+
+    @Test(timeout = 2_000L, expected = Exception.class)
     public void timeoutExpected() {
         throw new RuntimeException();
     }
 
-    @Test(expected = Exception.class, timeout = 100)
+    @Test(expected = Exception.class, timeout = 100 * (2 + 3))
     public void expectedTimeout() {
         throw new RuntimeException();
     }
