@@ -190,12 +190,12 @@ s/^import org\.junit\.\*;/import org.junit.jupiter.api.*;/
         s/.*/        org.junit.jupiter.api.Assertions.assertThrows(/
         G
         a\
-        , () -> {
+\        , () -> {
     }
     # method end:
     /^    }$/ {
         i\
-        });
+\        });
     }
 
 }
