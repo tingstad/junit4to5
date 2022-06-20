@@ -130,7 +130,7 @@ s/org\.junit\.experimental\.categories\.Categories\.ExcludeCategory\((.*)\.class
 /@org\.junit\.runner\.RunWith\(org\.junit\.experimental\.categories\.Categories\.class\)/ b suiteSet
 b suiteEnd
 :suiteSet
-    s|.*|//@org.junit.platform.suite.api.Suite https://github.com/junit-team/junit5/issues/744|
+    s|.*|@org.junit.platform.suite.api.Suite|
     b suite
 :suiteEnd
 
