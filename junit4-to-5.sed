@@ -145,10 +145,9 @@ s/^import org\.junit\.\*;/import org.junit.jupiter.api.*;/
 
 /^[[:space:]]*@(org\.junit\.)?Test[[:space:]]*\((.*[^[:alnum:]])?timeout[[:space:]]*=/ {
     h
-    #remove /* */ comments:
-    s|/\*.*\*/||g
-    #remove // comments:
-    s|//.*||
+    #remove // and /* */ comments:
+    s,/(/.*|\*.*\*/),,g
+
     /timeout.*=/! {
         g; b endtimeout
     }
