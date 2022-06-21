@@ -60,6 +60,5 @@ Finally, fix any remaining build failures manually (or create an [issue](https:/
 
 1. Does not presume assertion library, leaving `assertThat` to fail
 2. Does not parse arguments on multiple lines to shift the "message" parameter position of assertTrue/False/Equals
-3. `@Suite` [not yet supported in JUnit 5](https://github.com/junit-team/junit5/issues/744)
-4. Probably many features still missing
+3. Probably many features still missing
 
