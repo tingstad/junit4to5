@@ -96,19 +96,24 @@ s/org\.junit\.Assume/org.junit.jupiter.api.Assumptions/g
 }
 s/org\.junit\.experimental\.categories\.Category/org.junit.jupiter.api.Tag/g
 
-#TODO imports (SuiteClasses)
-/^import org\.junit\.runners\.(Suite|\*);/,$ {
-    s/@(org\.junit\.runners\.)?Suite.SuiteClasses\(/@org.junit.platform.suite.api.SelectClasses(/g
-    /^import org\.junit\.runners\.Suite;/d
+/^import org\.junit\.runners\.Suite\.SuiteClasses;/,$ {
+    s/^import org\.junit\.runners\.Suite\.SuiteClasses;/import org.junit.platform.suite.api.SelectClasses;/
+    s/@(org\.junit\.runners\.Suite\.)?SuiteClasses\(/@SelectClasses(/g
 }
-#TODO RunWith(Suite)?
+/^import org\.junit\.runners\.Suite;/,$ {
+    s/^import org\.junit\.runners\.Suite;/import org.junit.platform.suite.api.SelectClasses;/
+    s/@(org\.junit\.runners\.)?Suite.SuiteClasses\(/@SelectClasses(/g
+}
+/^import org\.junit\.runners\.\*;/,$ {
+    s/@(org\.junit\.runners\.)?Suite.SuiteClasses\(/@org.junit.platform.suite.api.SelectClasses(/g
+}
 
 #TODO IncludeTags, imports. categories.* (Categories/Category) conflict (Tag/Excludetags)
 /^import org\.junit\.experimental\.categories\.(Categories|\*);/,$ {
     #TODO multiple params
-    s/@(org\.junit\.experimental\.categories\.)?Categories\.ExcludeCategory\((.*)\.class\)/@org.junit.platform.suite.api.ExcludeTags("\2")/g
+    s/@(org\.junit\.experimental\.categories\.)?Categories\.(Ex|In)cludeCategory\((.*)\.class\)/@org.junit.platform.suite.api.\2cludeTags("\3")/g
 }
-s/org\.junit\.experimental\.categories\.Categories\.ExcludeCategory\((.*)\.class\)/org.junit.platform.suite.api.ExcludeTags("\1")/g
+s/(org\.junit\.experimental\.categories\.)Categories\.(Ex|In)cludeCategory\((.*)\.class\)/org.junit.platform.suite.api.\2cludeTags("\3")/g
 
 :suite
 /^import org\.junit\.experimental\.categories\.(Categories|\*);/,$ {
