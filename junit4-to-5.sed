@@ -106,7 +106,7 @@ s/org\.junit\.experimental\.categories\.Category/org.junit.jupiter.api.Tag/g
 #TODO IncludeTags, imports. categories.* (Categories/Category) conflict (Tag/Excludetags)
 /^import org\.junit\.experimental\.categories\.(Categories|\*);/,$ {
     #TODO multiple params
-    s/@(org\.junit\.experimental\.categories\.)?Categories.ExcludeCategory\((.*)\.class\)/@org.junit.platform.suite.api.ExcludeTags("\1")/g
+    s/@(org\.junit\.experimental\.categories\.)?Categories\.ExcludeCategory\((.*)\.class\)/@org.junit.platform.suite.api.ExcludeTags("\2")/g
 }
 s/org\.junit\.experimental\.categories\.Categories\.ExcludeCategory\((.*)\.class\)/org.junit.platform.suite.api.ExcludeTags("\1")/g
 
