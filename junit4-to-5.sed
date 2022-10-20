@@ -115,6 +115,34 @@ s/org\.junit\.experimental\.categories\.Category/org.junit.jupiter.api.Tag/g
 }
 s/(org\.junit\.experimental\.categories\.)Categories\.(Ex|In)cludeCategory\((.*)\.class\)/org.junit.platform.suite.api.\2cludeTags("\3")/g
 
+/import org\.junit\.runners\.Parameterized/d
+/@RunWith\((org\.junit\.runners\.Parameterized\.)?Parameterized\.class\)/,${
+    /^[[:space:]]*@RunWith\((org\.junit\.runners\.Parameterized\.)?Parameterized\.class\)[[:space:]]*$/d
+    s/@RunWith\((org\.junit\.runners\.Parameterized\.)?Parameterized\.class\)//
+    /@(Parameterized.)?Parameters/{
+        s/.*//
+        n
+        s/[[:space:]]+[[:alpha:]][[:alnum:]]*[[:space:]]*\(/ parametersSource(/
+    }
+    /^[[:space:]]*public [A-Z][[:alnum:]]*[[:space:]]*\([^()]*\)/,${
+        # Assumes that constructor precedes @Test methods
+        /^[[:space:]]*public [A-Z][[:alnum:]]*[[:space:]]*\([^()]*\)/{
+            h
+            s/.*\((.*)\).*/\1/
+            x
+            s/(.*\().*(\).*)/\1\2/
+        }
+        /^[[:space:]]*@Test/{
+            s/@Test/@org.junit.jupiter.params.ParameterizedTest/
+            p
+            s/@.*/@org.junit.jupiter.params.provider.MethodSource("parametersSource")/
+            n
+            G
+            s/(.*\().*\n(.*)/\1\2) {/
+        }
+    }
+}
+
 :suite
 /^import org\.junit\.experimental\.categories\.(Categories|\*);/,$ {
     /^import org\.junit\.runner\.(RunWith|\*);/,$ {
