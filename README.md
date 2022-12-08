@@ -11,7 +11,7 @@ $(command -v wget && printf %s -O- || command -v curl) \
 
 2. Run script on java test files:
 ```sh
-find . -path '*/src/test/*' -name \*.java -exec sed -E -i.b -f junit4-to-5.sed {} \; -exec rm {}.b \;
+find . -path '*/src/test/*.java' -exec sed -E -i.b -f junit4-to-5.sed {} \; -exec rm {}.b \;
 ```
 
 3. Update your `pom.xml` dependencies, see [this example](https://github.com/tingstad/junit4to5/blob/master/test/junit5.pom.xml) or the [User Guide](https://junit.org/junit5/docs/current/user-guide/#running-tests-build).
