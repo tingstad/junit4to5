@@ -1,6 +1,6 @@
 # JUnit 4 -> 5
 
-A sed script to aid migration from JUnit 4 to 5.
+A sed script to aid migration from JUnit 4 to JUnit 5.
 
 1. Download [junit4-to-5.sed](https://github.com/tingstad/junit4to5/blob/master/junit4-to-5.sed):
 ```sh
