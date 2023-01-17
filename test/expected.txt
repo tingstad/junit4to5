@@ -27,4 +27,4 @@ org.junit.jupiter.api.Assertions.assertNotNull(value);
 org.junit.jupiter.api.Assertions.assertNull(value, "message");
 org.junit.jupiter.api.Assertions.assertNotNull(value, "message");
 org.junit.jupiter.api.Assertions.assertEquals(2 , fooDAO.findFoo(obj.get().getId()).size(), "Expect 2 record " );
-
+@org.junit.ClassRule // see org.junit.jupiter.api.extension.ExtendWith
