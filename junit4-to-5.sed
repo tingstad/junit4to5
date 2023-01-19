@@ -219,9 +219,9 @@ s/^import org\.junit\.\*;/import org.junit.jupiter.api.*;/
 }
 
 # Assumes an indentation of 4 spaces
-/@Test.*expected/,/^    }/ {
+/^[[:space:]]*@Test.*expected/,/^    }/ {
 
-    /@Test.*expected/ {
+    /^[[:space:]]*@Test.*expected/ {
         s/.*[= ](.*\.class).*/        \1/
         h
         s/.*/    @Test/
