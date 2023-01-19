@@ -113,7 +113,7 @@ s/org\.junit\.experimental\.categories\.Category/org.junit.jupiter.api.Tag/g
 /^import org\.junit\.Rule;/,$ {
     s|^[[:space:]]*@Rule|& // see org.junit.jupiter.api.extension.ExtendWith|
 }
-s|^[[:space:]]*(@org\.junit\.)?(Class)?Rule|& // see org.junit.jupiter.api.extension.ExtendWith|
+s|^[[:space:]]*@(org\.junit\.)?(Class)?Rule|& // see org.junit.jupiter.api.extension.ExtendWith|
 
 #TODO IncludeTags, imports. categories.* (Categories/Category) conflict (Tag/Excludetags)
 /^import org\.junit\.experimental\.categories\.(Categories|\*);/,$ {
