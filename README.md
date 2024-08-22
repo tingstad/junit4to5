@@ -20,23 +20,23 @@ Finally, fix any remaining build failures manually (or create an [issue](https:/
 
 The script replaces:
 
-Old                                        | New
--------------------------------------------|-----------------------------------------------
-`org.junit.Test`                           | `org.junit.jupiter.api.Test`
-`org.junit.Assert`                         | `org.junit.jupiter.api.Assertions`
-`@Before`, `@After`                        | `@BeforeEach`, `@AfterEach`
-`@BeforeClass`, `@AfterClass`              | `@BeforeAll`, `@AfterAll`
-`@Ignore`                                  | `@Disabled`
-`@Category`                                | `@Tag`
-`@RunWith`                                 | `@ExtendWith`
-`@Test(timeout=3000)`                      | `@Timeout(3)`
-`@Test(expected=Ex.class) m(){ ...`        | `@Test m(){ assertThrows(Ex.class, () -> ...`
-`@RunWith(Parameterized.class)`, `@Test`   | `@ParameterizedTest`
-`assertTrue/assertFalse("msg", val)`       | `assertTrue/assertFalse(val, "msg")`
-`assertNull/assertNotNull("msg", val)`     | `assertNull/assertNotNull(val, "msg")`
-`assertEquals(msg, expected, actual)`      | `assert(Not)Equals(expected, actual, msg)`
-`assertSame/NotSame(msg, expected, actual)`| `assert(Not)Same(expected, actual, msg)`
-`assertArrayEquals(msg, expected, actual)` | `assertArrayEquals(expected, actual, msg)`
+| Old                                         | New                                           |
+|---------------------------------------------|-----------------------------------------------|
+| `org.junit.Test`                            | `org.junit.jupiter.api.Test`                  |
+| `org.junit.Assert`                          | `org.junit.jupiter.api.Assertions`            |
+| `@Before`, `@After`                         | `@BeforeEach`, `@AfterEach`                   |
+| `@BeforeClass`, `@AfterClass`               | `@BeforeAll`, `@AfterAll`                     |
+| `@Ignore`                                   | `@Disabled`                                   |
+| `@Category`                                 | `@Tag`                                        |
+| `@RunWith`                                  | `@ExtendWith`                                 |
+| `@Test(timeout=3000)`                       | `@Timeout(3)`                                 |
+| `@Test(expected=Ex.class) m(){ ...`         | `@Test m(){ assertThrows(Ex.class, () -> ...` |
+| `@RunWith(Parameterized.class)`, `@Test`    | `@ParameterizedTest`                          |
+| `assertTrue/assertFalse("msg", val)`        | `assertTrue/assertFalse(val, "msg")`          |
+| `assertNull/assertNotNull("msg", val)`      | `assertNull/assertNotNull(val, "msg")`        |
+| `assertEquals(msg, expected, actual)`       | `assert(Not)Equals(expected, actual, msg)`    |
+| `assertSame/NotSame(msg, expected, actual)` | `assert(Not)Same(expected, actual, msg)`      |
+| `assertArrayEquals(msg, expected, actual)`  | `assertArrayEquals(expected, actual, msg)`    |
 
 ## Philosophy
 
